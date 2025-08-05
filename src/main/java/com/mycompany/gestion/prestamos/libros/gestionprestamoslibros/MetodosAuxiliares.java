@@ -43,7 +43,8 @@ public class MetodosAuxiliares {
         System.out.println("3. Buscar libro por título");
         System.out.println("4. Prestar libro");
         System.out.println("5. Devolver libro");
-        System.out.println("6. Salir");
+        System.out.println("6. Listar libros prestados");
+        System.out.println("7. Salir");
     }
     
     public static void mostrarMensajeNoExisteLibroBuscado() {

@@ -12,7 +12,7 @@ public class Principal {
 
         while (!salir) {
             MetodosAuxiliares.mostrarMenu();
-            int opcion = MetodosAuxiliares.leerIntEntre(sc, "Elegí una opción: ", 1, 6);
+            int opcion = MetodosAuxiliares.leerIntEntre(sc, "Elegí una opción: ", 1, 7);
 
             switch (opcion) {
                 case 1 -> {
@@ -54,6 +54,11 @@ public class Principal {
                 }
                 
                 case 6 -> {
+                    System.out.println("\n--- Lista de libros prestados ---");
+                    biblioteca.listarLibrosPrestados();
+                }
+                
+                case 7 -> {
                     salir = true;
                     System.out.println("¡Hasta luego!");
                 }
