@@ -12,7 +12,7 @@ public class Principal {
 
         while (!salir) {
             MetodosAuxiliares.mostrarMenu();
-            int opcion = MetodosAuxiliares.leerIntEntre(sc, "Elegí una opción: ", 1, 7);
+            int opcion = MetodosAuxiliares.leerIntEntre(sc, "Elegí una opción: ", 1, 8);
 
             switch (opcion) {
                 case 1 -> {
@@ -59,6 +59,12 @@ public class Principal {
                 }
                 
                 case 7 -> {
+                    System.out.println("\n--- Devolución de libros por autor ---");
+                    String autor = MetodosAuxiliares.leerTextoNoVacio(sc, "Ingrese el autor cuyos libros desea devolver: ");
+                    biblioteca.devolverLibrosPorAutor(autor);
+                }
+                
+                case 8 -> {
                     salir = true;
                     System.out.println("¡Hasta luego!");
                 }

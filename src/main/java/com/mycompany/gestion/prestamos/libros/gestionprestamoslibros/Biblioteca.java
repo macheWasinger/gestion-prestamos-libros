@@ -3,6 +3,7 @@ package com.mycompany.gestion.prestamos.libros.gestionprestamoslibros;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Biblioteca {
 
@@ -74,11 +75,7 @@ public class Biblioteca {
             return;
         }
 
-        /*
-        Es la forma moderna de Java para ordenar listas según un criterio 
-        (en este caso, por el título del libro). */
-        List<Libro> listaOrdenadaAlfabeticamente = new ArrayList<>(libros);
-        listaOrdenadaAlfabeticamente.sort(Comparator.comparing(Libro::getTitulo));
+        List<Libro>listaOrdenadaAlfabeticamente = MetodosAuxiliares.ordenarLibrosAlfabeticamente(libros);
 
         for (Libro libro : listaOrdenadaAlfabeticamente) {
             if (!libro.isDisponible()) {
@@ -98,6 +95,40 @@ public class Biblioteca {
             System.out.println("No hay libros prestados actualmente.");
         } else {
             System.out.println("Cantidad total de libros prestados: " + cantidadPrestados);
+        }
+    }
+    
+    public void devolverLibrosPorAutor(String autor) {
+        
+        if (libros.isEmpty()) {
+            MetodosAuxiliares.mostrarMensajeNoExistenLibrosEnLaLista();
+            return;
+        }
+        
+        List<Libro> listaOrdenadaAlfabeticamente = MetodosAuxiliares.ordenarLibrosAlfabeticamente(libros);     
+        List<Libro> librosDelAutor = listaOrdenadaAlfabeticamente.stream()
+                .filter(libro -> libro.getAutor().equalsIgnoreCase(autor) && !libro.isDisponible())
+                .collect(Collectors.toList());
+        
+        if (librosDelAutor.isEmpty()) {
+            System.out.println("No hay libros prestados de ese autor");
+            return;
+        }
+        
+        long cantidadDeLibrosParaDevolver = librosDelAutor.size();
+        
+        System.out.println("Se devolvieron " + cantidadDeLibrosParaDevolver + " libros prestados del autor " + autor + ": ");
+        for (Libro libro : librosDelAutor) {
+            /* Recorro la lista "librosDelAutor" porque ya está filtrada, así 
+            EVITO tener que aplicar NUEVAMENTE las CONDICIONES:
+            `libro.getAutor().equalsIgnoreCase(autor) && !libro.isDisponible())`
+            */
+            libro.setDisponible(true);
+            System.out.println("- " + libro.getTitulo());
+        }
+        
+        if (cantidadDeLibrosParaDevolver > 0) {
+            System.out.println("Cantidad total de libros devueltos: " + cantidadDeLibrosParaDevolver);
         }
     }
 

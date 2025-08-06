@@ -1,5 +1,8 @@
 package com.mycompany.gestion.prestamos.libros.gestionprestamoslibros;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Scanner;
 
 public class MetodosAuxiliares {
@@ -44,10 +47,25 @@ public class MetodosAuxiliares {
         System.out.println("4. Prestar libro");
         System.out.println("5. Devolver libro");
         System.out.println("6. Listar libros prestados");
-        System.out.println("7. Salir");
+        System.out.println("7. Devolver libros por autor");
+        System.out.println("8. Salir");
     }
     
     public static void mostrarMensajeNoExisteLibroBuscado() {
         System.out.println("No se encontró ningún libro con ese título.");
+    }
+    
+    public static void mostrarMensajeNoExistenLibrosEnLaLista() {
+        System.out.println("La lista de libros de la biblioteca se encuentra vacía.");
+    }
+    
+    public static List<Libro> ordenarLibrosAlfabeticamente(List<Libro> libros) {
+        /*
+        Es la forma moderna de Java para ordenar listas según un criterio 
+        (en este caso, por el título del libro). */
+        List<Libro> listaOrdenadaAlfabeticamente = new ArrayList<>(libros);
+        listaOrdenadaAlfabeticamente.sort(Comparator.comparing(Libro::getTitulo));
+        
+        return listaOrdenadaAlfabeticamente;
     }
 }
