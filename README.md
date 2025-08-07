@@ -53,8 +53,7 @@ El sistema está organizado en las siguientes clases:
 
 ```bash
 git clone https://github.com/tu-usuario/gestion-prestamos-libros.git
-
----
+```
 
 2. Abrilo con NetBeans o tu IDE de preferencia
 
