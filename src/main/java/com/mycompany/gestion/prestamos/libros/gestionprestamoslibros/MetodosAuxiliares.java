@@ -50,7 +50,8 @@ public class MetodosAuxiliares {
         System.out.println("7. Devolver libros por autor");
         System.out.println("8. Filtrar libros disponibles por género");
         System.out.println("9. Mostrar estadísticas generales");
-        System.out.println("10. Salir");
+        System.out.println("10. Eliminar un libro por su título");
+        System.out.println("11. Salir");
     }
     
     public static void mostrarMensajeNoExisteLibroBuscado() {
@@ -90,5 +91,21 @@ public class MetodosAuxiliares {
                 .count();
         
         return cantidadDisponibles;
+    }
+    
+    // VALIDACIÓN PARA ENTRADA DE TIPO BOOLEAN
+    public static boolean confirmacion(Scanner sc, String mensaje) {
+        while (true) {
+            System.out.print(mensaje + " (s/n): ");
+            String input = sc.nextLine().trim().toLowerCase();
+
+            if (input.equals("s") || input.equals("sí") || input.equals("si")) {
+                return true;
+            } else if (input.equals("n") || input.equals("no")) {
+                return false;
+            } else {
+                System.out.println("Entrada inválida. Por favor ingresá 's' para sí o 'n' para no.");
+            }
+        }
     }
 }

@@ -12,7 +12,7 @@ public class Principal {
 
         while (!salir) {
             MetodosAuxiliares.mostrarMenu();
-            int opcion = MetodosAuxiliares.leerIntEntre(sc, "Elegí una opción: ", 1, 10);
+            int opcion = MetodosAuxiliares.leerIntEntre(sc, "Elegí una opción: ", 1, 11);
 
             switch (opcion) {
                 case 1 -> {
@@ -77,6 +77,12 @@ public class Principal {
                 }
                 
                 case 10 -> {
+                    System.out.println("\n--- Eliminar un libro por su título ---");
+                    String titulo = MetodosAuxiliares.leerTextoNoVacio(sc, "Título del libro: ");
+                    biblioteca.eliminarLibro(sc, titulo);
+                }
+                
+                case 11 -> {
                     salir = true;
                     System.out.println("¡Hasta luego!");
                 }

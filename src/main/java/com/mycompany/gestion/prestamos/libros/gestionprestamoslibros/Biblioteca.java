@@ -2,6 +2,8 @@ package com.mycompany.gestion.prestamos.libros.gestionprestamoslibros;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Biblioteca {
@@ -74,7 +76,7 @@ public class Biblioteca {
             return;
         }
 
-        List<Libro>listaOrdenadaAlfabeticamente = MetodosAuxiliares.ordenarLibrosAlfabeticamente(libros);
+        List<Libro> listaOrdenadaAlfabeticamente = MetodosAuxiliares.ordenarLibrosAlfabeticamente(libros);
 
         for (Libro libro : listaOrdenadaAlfabeticamente) {
             if (!libro.isDisponible()) {
@@ -90,87 +92,115 @@ public class Biblioteca {
             System.out.println("Cantidad total de libros prestados: " + cantidadPrestados);
         }
     }
-    
+
     public void devolverLibrosPorAutor(String autor) {
-        
+
         if (libros.isEmpty()) {
             MetodosAuxiliares.mostrarMensajeNoExistenLibrosEnLaLista();
             return;
         }
-        
-        List<Libro> listaOrdenadaAlfabeticamente = MetodosAuxiliares.ordenarLibrosAlfabeticamente(libros);     
+
+        List<Libro> listaOrdenadaAlfabeticamente = MetodosAuxiliares.ordenarLibrosAlfabeticamente(libros);
         List<Libro> librosDelAutor = listaOrdenadaAlfabeticamente.stream()
                 .filter(libro -> libro.getAutor().equalsIgnoreCase(autor) && !libro.isDisponible())
                 .collect(Collectors.toList());
-        
+
         if (librosDelAutor.isEmpty()) {
             System.out.println("No se encontraron libros prestados del autor " + autor);
             return;
         }
-        
+
         long cantidadDeLibrosParaDevolver = librosDelAutor.size();
-        
+
         System.out.println("Se devolvieron " + cantidadDeLibrosParaDevolver + " libros prestados del autor " + autor + ": ");
         for (Libro libro : librosDelAutor) {
             /* Recorro la lista "librosDelAutor" porque ya está filtrada, así 
             EVITO tener que aplicar NUEVAMENTE las CONDICIONES:
             `libro.getAutor().equalsIgnoreCase(autor) && !libro.isDisponible())`
-            */
+             */
             libro.setDisponible(true);
             System.out.println("- " + libro.getTitulo());
         }
-        
+
         if (cantidadDeLibrosParaDevolver > 0) {
             System.out.println("Cantidad total de libros devueltos: " + cantidadDeLibrosParaDevolver);
         }
     }
-    
+
     public void filtrarLibrosDisponiblesPorGenero(String genero) {
         if (libros.isEmpty()) {
             MetodosAuxiliares.mostrarMensajeNoExistenLibrosEnLaLista();
             return;
         }
-        
+
         List<Libro> listaOrdenadaAlfabeticamentePorTitulo = MetodosAuxiliares.ordenarLibrosAlfabeticamente(libros);
         List<Libro> listaDelGenero = listaOrdenadaAlfabeticamentePorTitulo.stream()
                 .filter(libro -> libro.getGenero().equalsIgnoreCase(genero) && libro.isDisponible())
                 .collect(Collectors.toList());
-        
+
         if (listaDelGenero.isEmpty()) {
             System.out.println("No hay libros disponibles del género " + genero);
             return;
         }
-        
+
         System.out.println("Libros disponibles filtrados por el género " + genero + ": ");
         for (Libro libro : listaDelGenero) {
             System.out.println("- " + libro.getTitulo());
         }
     }
-    
+
     public void mostrarEstadisticasGenerales() {
         if (libros.isEmpty()) {
             MetodosAuxiliares.mostrarMensajeNoExistenLibrosEnLaLista();
             return;
         }
-        
+
         List<String> listaGenerosConDuplicados = new ArrayList<>();
-        
+
         for (Libro libro : libros) {
             listaGenerosConDuplicados.add(libro.getGenero().toLowerCase());
         }
-        
+
         List<String> listaGenerosSinDuplicados = listaGenerosConDuplicados.stream()
                 .distinct()
                 .collect(Collectors.toList());
-        
-        
+
         System.out.println("Cantidad total de libros cargados: " + libros.size());
         System.out.println("Cantidad total de libros disponibles: " + MetodosAuxiliares.cantidadLibrosDisponibles(libros));
         System.out.println("Cantidad total de libros prestados: " + MetodosAuxiliares.cantidadLibrosPrestados(libros));
-        
+
         System.out.println("Géneros presentes en la biblioteca: ");
-        for(String genero : listaGenerosSinDuplicados) {
+        for (String genero : listaGenerosSinDuplicados) {
             System.out.println("- " + genero);
+        }
+    }
+
+    public void eliminarLibro(Scanner sc, String titulo) {
+      
+        if (libros.isEmpty()) {
+            MetodosAuxiliares.mostrarMensajeNoExistenLibrosEnLaLista();
+            return;
+        }
+        
+        // Verifico si existe el libro antes de preguntar si desea eliminarlo
+        Optional<Libro> libroAEliminar = libros.stream()
+                .filter(libro -> libro.getTitulo().equalsIgnoreCase(titulo))
+                .findFirst();
+        
+        if (libroAEliminar.isEmpty()) {
+            System.out.println("No hay ningún libro con el título " + titulo);
+            return;
+        }
+
+        // Si existe, se pregunta si desea eliminar
+        boolean confirmacionEliminar = MetodosAuxiliares.confirmacion(sc, "¿Estás seguro de eliminar este libro?");
+
+        if (confirmacionEliminar) {
+            // Extrae el libro que está adentro del Optional<Libro>
+            libros.remove(libroAEliminar.get());
+            System.out.println("Libro eliminado correctamente.");
+        } else {
+            System.out.println("De acuerdo. El libro no se eliminará.");
         }
     }
 
