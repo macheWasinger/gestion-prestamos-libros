@@ -53,6 +53,7 @@ El sistema está organizado en las siguientes clases:
 
 ```bash
 git clone https://github.com/tu-usuario/gestion-prestamos-libros.git
+```
 
 ---
 
@@ -65,7 +66,6 @@ git clone https://github.com/tu-usuario/gestion-prestamos-libros.git
 ## 👤 Autor
 
 **Marcelo Wasinger**
-
 ---
 
 Gracias por visitar este repositorio.  
