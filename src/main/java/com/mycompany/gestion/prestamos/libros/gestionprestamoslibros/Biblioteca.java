@@ -1,7 +1,6 @@
 package com.mycompany.gestion.prestamos.libros.gestionprestamoslibros;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -83,13 +82,7 @@ public class Biblioteca {
             }
         }
 
-        /* Para reemplazar el contador:
-            - Siempre preciso, sin riesgo de error si me olvido de actualizar el contador.
-            - Ligeramente más costoso (pero irrelevante en listas pequeñas).
-         */
-        long cantidadPrestados = listaOrdenadaAlfabeticamente.stream()
-                .filter(libro -> !libro.isDisponible())
-                .count();
+        long cantidadPrestados = MetodosAuxiliares.cantidadLibrosPrestados(listaOrdenadaAlfabeticamente);
 
         if (cantidadPrestados == 0) {
             System.out.println("No hay libros prestados actualmente.");
@@ -111,7 +104,7 @@ public class Biblioteca {
                 .collect(Collectors.toList());
         
         if (librosDelAutor.isEmpty()) {
-            System.out.println("No hay libros prestados de ese autor");
+            System.out.println("No se encontraron libros prestados del autor " + autor);
             return;
         }
         
@@ -129,6 +122,55 @@ public class Biblioteca {
         
         if (cantidadDeLibrosParaDevolver > 0) {
             System.out.println("Cantidad total de libros devueltos: " + cantidadDeLibrosParaDevolver);
+        }
+    }
+    
+    public void filtrarLibrosDisponiblesPorGenero(String genero) {
+        if (libros.isEmpty()) {
+            MetodosAuxiliares.mostrarMensajeNoExistenLibrosEnLaLista();
+            return;
+        }
+        
+        List<Libro> listaOrdenadaAlfabeticamentePorTitulo = MetodosAuxiliares.ordenarLibrosAlfabeticamente(libros);
+        List<Libro> listaDelGenero = listaOrdenadaAlfabeticamentePorTitulo.stream()
+                .filter(libro -> libro.getGenero().equalsIgnoreCase(genero) && libro.isDisponible())
+                .collect(Collectors.toList());
+        
+        if (listaDelGenero.isEmpty()) {
+            System.out.println("No hay libros disponibles del género " + genero);
+            return;
+        }
+        
+        System.out.println("Libros disponibles filtrados por el género " + genero + ": ");
+        for (Libro libro : listaDelGenero) {
+            System.out.println("- " + libro.getTitulo());
+        }
+    }
+    
+    public void mostrarEstadisticasGenerales() {
+        if (libros.isEmpty()) {
+            MetodosAuxiliares.mostrarMensajeNoExistenLibrosEnLaLista();
+            return;
+        }
+        
+        List<String> listaGenerosConDuplicados = new ArrayList<>();
+        
+        for (Libro libro : libros) {
+            listaGenerosConDuplicados.add(libro.getGenero().toLowerCase());
+        }
+        
+        List<String> listaGenerosSinDuplicados = listaGenerosConDuplicados.stream()
+                .distinct()
+                .collect(Collectors.toList());
+        
+        
+        System.out.println("Cantidad total de libros cargados: " + libros.size());
+        System.out.println("Cantidad total de libros disponibles: " + MetodosAuxiliares.cantidadLibrosDisponibles(libros));
+        System.out.println("Cantidad total de libros prestados: " + MetodosAuxiliares.cantidadLibrosPrestados(libros));
+        
+        System.out.println("Géneros presentes en la biblioteca: ");
+        for(String genero : listaGenerosSinDuplicados) {
+            System.out.println("- " + genero);
         }
     }
 

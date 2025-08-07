@@ -12,14 +12,15 @@ public class Principal {
 
         while (!salir) {
             MetodosAuxiliares.mostrarMenu();
-            int opcion = MetodosAuxiliares.leerIntEntre(sc, "Elegí una opción: ", 1, 8);
+            int opcion = MetodosAuxiliares.leerIntEntre(sc, "Elegí una opción: ", 1, 10);
 
             switch (opcion) {
                 case 1 -> {
                     System.out.println("\n--- Agregar libro ---");
                     String titulo = MetodosAuxiliares.leerTextoNoVacio(sc, "Título: ");
                     String autor = MetodosAuxiliares.leerTextoNoVacio(sc, "Autor: ");
-                    biblioteca.agregarLibro(new Libro(titulo, autor));
+                    String genero = MetodosAuxiliares.leerTextoNoVacio(sc, "Género: ");
+                    biblioteca.agregarLibro(new Libro(titulo, autor, genero));
                     System.out.println("Libro agregado con éxito.");
                 }
 
@@ -36,19 +37,19 @@ public class Principal {
                         System.out.println("Libro encontrado:");
                         System.out.println(encontrado);
                     } else {
-                        System.out.println("No se encontró ningún libro con ese título.");
+                        MetodosAuxiliares.mostrarMensajeNoExistenLibrosEnLaLista();
                     }
                 }
 
                 case 4 -> {
                     System.out.println("\n--- Prestar libro ---");
-                    String titulo = MetodosAuxiliares.leerTextoNoVacio(sc, "Ingrese el título del libro que desea prestar: ");
+                    String titulo = MetodosAuxiliares.leerTextoNoVacio(sc, "Título del libro: ");
                     biblioteca.prestarLibro(titulo);
                 }
 
                 case 5 -> {
                     System.out.println("\n--- Devolver libro ---");
-                    String titulo = MetodosAuxiliares.leerTextoNoVacio(sc, "Ingrese el título del libro que desea devolver: ");
+                    String titulo = MetodosAuxiliares.leerTextoNoVacio(sc, "Título del libro: ");
                     biblioteca.devolverLibro(titulo);
                     
                 }
@@ -65,6 +66,17 @@ public class Principal {
                 }
                 
                 case 8 -> {
+                    System.out.println("\n--- Libros disponibles filtrados por género ---");
+                    String genero = MetodosAuxiliares.leerTextoNoVacio(sc, "Ingrese el género cuyos libros desea filtrar: ");
+                    biblioteca.filtrarLibrosDisponiblesPorGenero(genero);
+                }
+                
+                case 9 -> {
+                    System.out.println("\n--- Estadísticas generales de la biblioteca ---");
+                    biblioteca.mostrarEstadisticasGenerales();
+                }
+                
+                case 10 -> {
                     salir = true;
                     System.out.println("¡Hasta luego!");
                 }

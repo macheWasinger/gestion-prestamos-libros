@@ -48,7 +48,9 @@ public class MetodosAuxiliares {
         System.out.println("5. Devolver libro");
         System.out.println("6. Listar libros prestados");
         System.out.println("7. Devolver libros por autor");
-        System.out.println("8. Salir");
+        System.out.println("8. Filtrar libros disponibles por género");
+        System.out.println("9. Mostrar estadísticas generales");
+        System.out.println("10. Salir");
     }
     
     public static void mostrarMensajeNoExisteLibroBuscado() {
@@ -67,5 +69,26 @@ public class MetodosAuxiliares {
         listaOrdenadaAlfabeticamente.sort(Comparator.comparing(Libro::getTitulo));
         
         return listaOrdenadaAlfabeticamente;
+    }
+    
+    public static long cantidadLibrosPrestados(List<Libro> libros) {
+        
+        /* Para reemplazar el contador:
+            - Siempre preciso, sin riesgo de error si me olvido de actualizar el contador.
+            - Ligeramente más costoso (pero irrelevante en listas pequeñas).
+         */
+        long cantidadPrestados = libros.stream()
+                .filter(libro -> !libro.isDisponible())
+                .count();
+        
+        return cantidadPrestados;
+    }
+    
+    public static long cantidadLibrosDisponibles(List<Libro> libros) {
+        long cantidadDisponibles = libros.stream()
+                .filter(libro -> libro.isDisponible())
+                .count();
+        
+        return cantidadDisponibles;
     }
 }

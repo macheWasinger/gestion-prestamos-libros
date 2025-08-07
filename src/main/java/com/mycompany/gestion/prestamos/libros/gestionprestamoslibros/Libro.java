@@ -4,11 +4,13 @@ package com.mycompany.gestion.prestamos.libros.gestionprestamoslibros;
 public class Libro {
     private String titulo;
     private String autor;
+    private String genero;
     private boolean disponible;
 
-    public Libro(String titulo, String autor) {
+    public Libro(String titulo, String autor, String genero) {
         this.titulo = titulo;
         this.autor = autor;
+        this.genero = genero;
         this.disponible = true;
     }
 
@@ -18,6 +20,10 @@ public class Libro {
 
     public String getAutor() {
         return autor;
+    }
+    
+    public String getGenero() {
+        return genero;
     }
 
     public boolean isDisponible() {
@@ -30,7 +36,7 @@ public class Libro {
 
     @Override
     public String toString() {
-        return String.format("Título: %s | Autor: %s | Disponible: %s",
-                titulo, autor, disponible ? "Sí" : "No");
+        return String.format("Título: %s | Autor: %s | Género: %s | Disponible: %s",
+                titulo, autor, genero, disponible ? "Sí" : "No");
     }
 }
