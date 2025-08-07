@@ -12,7 +12,7 @@ public class Principal {
 
         while (!salir) {
             MetodosAuxiliares.mostrarMenu();
-            int opcion = MetodosAuxiliares.leerIntEntre(sc, "Elegí una opción: ", 1, 11);
+            int opcion = MetodosAuxiliares.leerIntEntre(sc, "Elegí una opción: ", 1, 13);
 
             switch (opcion) {
                 case 1 -> {
@@ -31,7 +31,7 @@ public class Principal {
 
                 case 3 -> {
                     System.out.println("\n--- Buscar libro por título ---");
-                    String titulo = MetodosAuxiliares.leerTextoNoVacio(sc, "Título: ");
+                    String titulo = MetodosAuxiliares.inputTitulo(sc);
                     Libro encontrado = biblioteca.buscarLibroPorTitulo(titulo);
                     if (encontrado != null) {
                         System.out.println("Libro encontrado:");
@@ -43,13 +43,13 @@ public class Principal {
 
                 case 4 -> {
                     System.out.println("\n--- Prestar libro ---");
-                    String titulo = MetodosAuxiliares.leerTextoNoVacio(sc, "Título del libro: ");
+                    String titulo = MetodosAuxiliares.inputTitulo(sc);
                     biblioteca.prestarLibro(titulo);
                 }
 
                 case 5 -> {
                     System.out.println("\n--- Devolver libro ---");
-                    String titulo = MetodosAuxiliares.leerTextoNoVacio(sc, "Título del libro: ");
+                    String titulo = MetodosAuxiliares.inputTitulo(sc);
                     biblioteca.devolverLibro(titulo);
                     
                 }
@@ -83,6 +83,17 @@ public class Principal {
                 }
                 
                 case 11 -> {
+                    System.out.println("\n--- Marcar un libro como perdido ---");
+                    String titulo = MetodosAuxiliares.inputTitulo(sc);
+                    biblioteca.marcarComoPerdido(sc, titulo);
+                }
+                
+                case 12 -> {
+                    System.out.println("\n--- Lista de libros perdidos");
+                    biblioteca.listarLibrosPerdidos();
+                }
+                
+                case 13 -> {
                     salir = true;
                     System.out.println("¡Hasta luego!");
                 }
