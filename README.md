@@ -64,7 +64,6 @@ git clone https://github.com/tu-usuario/gestion-prestamos-libros.git
 ## 👤 Autor
 
 **Marcelo Wasinger**
-
 ---
 
 Gracias por visitar este repositorio.  
