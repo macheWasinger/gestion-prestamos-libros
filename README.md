@@ -16,23 +16,23 @@ Cuenta con un menú interactivo y validaciones para asegurar el correcto funcion
 - Autor  
 - Género
 
-✔️ **Agregar libro** con título, autor y género.
-✔️ **Listar libros** disponibles en la biblioteca (excluyendo los perdidos).
-✔️ **Buscar libro por título**.
-✔️ **Prestar libro** (solo si está disponible y no perdido).
-✔️ **Devolver libro** (solo si estaba prestado).
-✔️ **Listar libros prestados**.
-✔️ **Devolver libros por autor**.
-✔️ **Filtrar libros disponibles por género**.
+✔️ **Agregar libro** con título, autor y género.  
+✔️ **Listar libros** disponibles en la biblioteca (excluyendo los perdidos).  
+✔️ **Buscar libro por título**.  
+✔️ **Prestar libro** (solo si está disponible y no perdido).  
+✔️ **Devolver libro** (solo si estaba prestado).  
+✔️ **Listar libros prestados**.  
+✔️ **Devolver libros por autor**.  
+✔️ **Filtrar libros disponibles por género**.  
 ✔️ **Mostrar estadísticas generales**:  
    - Total de libros cargados.  
    - Total de libros disponibles.  
    - Total de libros prestados.  
    - Total de libros perdidos.  
-   - Géneros presentes en la biblioteca.
-✔️ **Eliminar un libro por título** (con confirmación).
-✔️ **Marcar libros como perdidos** (solo si estaban prestados y con confirmación).
-✔️ **Listar libros perdidos**.
+   - Géneros presentes en la biblioteca.  
+✔️ **Eliminar un libro por título** (con confirmación).  
+✔️ **Marcar libros como perdidos** (solo si estaban prestados y con confirmación).  
+✔️ **Listar libros perdidos**.  
 ✔️ **Recuperar libros perdidos** (con confirmación, se marcan como disponibles y se eliminan de la lista de perdidos).
 
 ---
@@ -40,13 +40,9 @@ Cuenta con un menú interactivo y validaciones para asegurar el correcto funcion
 ## 🛠️ Tecnologías usadas
 
 - **Lenguaje:** Java 17  
-
 - **IDE:** NetBeans  
-
 - **Paradigma:** Programación Orientada a Objetos  
-
 - **Versión de JDK:** 17  
-
 - **Dependencias externas:** Ninguna
 
 ---
