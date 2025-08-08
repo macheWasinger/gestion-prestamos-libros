@@ -16,16 +16,24 @@ Cuenta con un menú interactivo y validaciones para asegurar el correcto funcion
 - Autor  
 - Género
 
-✔️ Listar todos los libros disponibles (se ocultan los perdidos)  
-✔️ Buscar un libro por título  
-✔️ Prestar y devolver libros individuales  
-✔️ Devolver todos los libros prestados de un autor específico  
-✔️ Filtrar libros disponibles por género  
-✔️ Mostrar estadísticas generales (cantidad total, prestados, disponibles, perdidos, géneros)  
-✔️ Eliminar libros por título (con confirmación)  
-✔️ Marcar libros como perdidos (con confirmación y solo si están prestados)  
-✔️ Listar todos los libros perdidos (opcional)  
-✔️ Validaciones completas de entrada de datos
+✔️ **Agregar libro** con título, autor y género.
+✔️ **Listar libros** disponibles en la biblioteca (excluyendo los perdidos).
+✔️ **Buscar libro por título**.
+✔️ **Prestar libro** (solo si está disponible y no perdido).
+✔️ **Devolver libro** (solo si estaba prestado).
+✔️ **Listar libros prestados**.
+✔️ **Devolver libros por autor**.
+✔️ **Filtrar libros disponibles por género**.
+✔️ **Mostrar estadísticas generales**:  
+   - Total de libros cargados.  
+   - Total de libros disponibles.  
+   - Total de libros prestados.  
+   - Total de libros perdidos.  
+   - Géneros presentes en la biblioteca.
+✔️ **Eliminar un libro por título** (con confirmación).
+✔️ **Marcar libros como perdidos** (solo si estaban prestados y con confirmación).
+✔️ **Listar libros perdidos**.
+✔️ **Recuperar libros perdidos** (con confirmación, se marcan como disponibles y se eliminan de la lista de perdidos).
 
 ---
 
