@@ -54,7 +54,8 @@ public class MetodosAuxiliares {
         System.out.println("10. Eliminar un libro por su título");
         System.out.println("11. Marcar libro como perdido");
         System.out.println("12. Listar libros perdidos");
-        System.out.println("13. Salir");
+        System.out.println("13. Recuperar libro perdido");
+        System.out.println("14. Salir");
     }
 
     public static void mostrarMensajeNoExistenLibrosEnLaLista() {

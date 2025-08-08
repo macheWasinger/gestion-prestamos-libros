@@ -12,7 +12,7 @@ public class Principal {
 
         while (!salir) {
             MetodosAuxiliares.mostrarMenu();
-            int opcion = MetodosAuxiliares.leerIntEntre(sc, "Elegí una opción: ", 1, 13);
+            int opcion = MetodosAuxiliares.leerIntEntre(sc, "Elegí una opción: ", 1, 14);
 
             switch (opcion) {
                 case 1 -> {
@@ -94,6 +94,12 @@ public class Principal {
                 }
                 
                 case 13 -> {
+                    System.out.println("\n--- Marcar un libro como recuperado ---");
+                    String titulo = MetodosAuxiliares.inputTitulo(sc);
+                    biblioteca.recuperarLibroPerdido(sc, titulo);
+                }
+                
+                case 14 -> {
                     salir = true;
                     System.out.println("¡Hasta luego!");
                 }

@@ -266,12 +266,47 @@ public class Biblioteca {
     //--- LISTAR LIBROS PERDIDOS ---
     public void listarLibrosPerdidos() {
         if (librosPerdidos.isEmpty()) {
-            MetodosAuxiliares.mostrarMensajeNoExistenLibrosEnLaLista();
+            System.out.println("La lista de libros perdidos se encuentra vacía.");
             return;
         }
         
         for (Libro libro : librosPerdidos) {
             System.out.println(libro);
+        }
+    }
+    
+    //--- RECUPERAR LIBRO PERDIDO ---
+    public void recuperarLibroPerdido(Scanner sc, String titulo) {
+        if (libros.isEmpty()) {
+            MetodosAuxiliares.mostrarMensajeNoExistenLibrosEnLaLista();
+            return;
+        }
+        
+        Optional<Libro> libroAmarcar = MetodosAuxiliares.buscarLibroPorTitulo(libros, titulo);
+        
+        if (libroAmarcar.isEmpty()) {
+            MetodosAuxiliares.mostrarMensajeNoHayLibroConTituloBuscado(titulo);
+            return;
+        }
+        
+        boolean confirmacionRecuperarPerdido = MetodosAuxiliares.confirmacion(sc, "¿Está seguro de haber recuperado el libro perdido?");
+        
+        if (confirmacionRecuperarPerdido) {
+            if (libroAmarcar.get().isPerdido()) {
+                libroAmarcar.get().setPerdido(false);
+                libroAmarcar.get().setDisponible(true);
+                librosPerdidos.remove(libroAmarcar.get());
+                System.out.println("Libro recuperado correctamente.");
+                
+                if (!librosPerdidos.isEmpty()) {
+                    System.out.println("Lista actualizada de libros perdidos");
+                    listarLibrosPerdidos();
+                }
+            } else {
+                System.out.println("El libro no se pudo recuperar porque no está perdido.");
+            }
+        } else {
+            System.out.println("De acuerdo. El libro no se marcará como recuperado.");
         }
     }
 
