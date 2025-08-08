@@ -30,6 +30,7 @@ Cuenta con un menú interactivo y validaciones para asegurar el correcto funcion
    - Total de libros prestados.  
    - Total de libros perdidos.  
    - Géneros presentes en la biblioteca.  
+
 ✔️ **Eliminar un libro por título** (con confirmación).  
 ✔️ **Marcar libros como perdidos** (solo si estaban prestados y con confirmación).  
 ✔️ **Listar libros perdidos**.  
